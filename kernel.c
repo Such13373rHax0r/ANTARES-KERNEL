@@ -94,14 +94,14 @@ void setupRubbish() {
 	itoa(p[1], c2, 10);
 	kprints(c1);
 	kprints(c2);
-/*
+
 	__asm__("movw $0x10, %ax");
 	__asm__("movw %ax, %ds");
 	__asm__("movw %ax, %es");
 	__asm__("movw %ax, %fs");
 	__asm__("movw %ax, %gs");
 	__asm__("ljmp $0x08, $next\n next:");
-*/	}
+	}
 
 
 
