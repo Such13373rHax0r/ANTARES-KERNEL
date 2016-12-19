@@ -79,11 +79,11 @@ uint8_t memR(uint32_t addr) {
 
 
 void setupRubbish() {
-	*(uint64_t *)0x200 + (64 * 0) = 0x0000000000000000;
-	*(uint64_t *)0x200 + (64 * 1) = 0x00CF9A000000FFFF;
-	*(uint64_t *)0x200 + (64 * 2) = 0x00CF92000000FFFF;
-	*(uint64_t *)0x200 + (64 * 3) = 0x00CFFA000000FFFF;
-	*(uint64_t *)0x200 + (64 * 4) = 0x00CFF2000000FFFF;
+	*(uint64_t *)(0x200 + (64 * 0)) = 0x0000000000000000;
+	*(uint64_t *)(0x200 + (64 * 1)) = 0x00CF9A000000FFFF;
+	*(uint64_t *)(0x200 + (64 * 2)) = 0x00CF92000000FFFF;
+	*(uint64_t *)(0x200 + (64 * 3)) = 0x00CFFA000000FFFF;
+	*(uint64_t *)(0x200 + (64 * 4)) = 0x00CFF2000000FFFF;
 	*(uint16_t *)0x100 = 0x113F;
 	*(uint32_t *)0x110 = 0x200;
 	__asm__("lgdt 0x100");
