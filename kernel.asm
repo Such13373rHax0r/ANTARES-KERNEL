@@ -56,6 +56,20 @@ _start:
 	# stack (as it grows downwards on x86 systems). This is necessarily done
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
+	mov $0x0000000000000000, 2
+	mov $0x00CF9A000000FFFF, 66
+	mov $0x00CF92000000FFFF, 130
+	mov $0x00CFFA000000FFFF, 194
+	mov $0x00CFF2000000FFFF, 258
+	mov $320, 300
+	mov $336, 2
+	mov $0x10, %ax
+	mov %ax, %ds
+	mov %ax, %es
+	mov %ax, %fs
+	mov %ax, %gs
+	ljmp $0x08, $next
+	next:
 
 	# This is a good place to initialize crucial processor state before the
 	# high-level kernel is entered. It's best to minimize the early
