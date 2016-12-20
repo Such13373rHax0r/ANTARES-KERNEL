@@ -56,11 +56,11 @@ _start:
 	# stack (as it grows downwards on x86 systems). This is necessarily done
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
-	movq $0x0000000000000000, 2
-	movq $0x00CF9A000000FFFF, 66
-	movq $0x00CF92000000FFFF, 130
-	movq $0x00CFFA000000FFFF, 194
-	movq $0x00CFF2000000FFFF, 258
+	movq $0x0000000000000000, 0x2
+	movq $0x00CF9A000000FFFF, 0x42
+	movq $0x00CF92000000FFFF, 0x82
+	movq $0x00CFFA000000FFFF, 0xC2
+	movq $0x00CFF2000000FFFF, 0x102
 	movw $320, 300
 	movw $336, 2
 	mov $0x10, %ax
