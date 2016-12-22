@@ -31,8 +31,15 @@
 stack_bottom:
 .skip 16384 # 16 KiB
 stack_top:
-
-
+gdt:
+.quad 0x0000000000000000
+.quad 0x00CF9A000000FFFF
+.quad 0x00CF92000000FFFF
+.quad 0x00CFFA000000FFFF
+.quad 0x00CFF2000000FFFF
+gdtr:
+.word 320
+.dword gdt
 
 # The linker script specifies _start as the entry point to the kernel and the
 # bootloader will jump to this position once the kernel has been loaded. It
@@ -41,6 +48,10 @@ stack_top:
 .global _start
 .type _start, @function
 _start:
+
+
+	lgdt $gdtr
+
 	# The bootloader has loaded us into 32-bit protected mode on a x86
 	# machine. Interrupts are disabled. Paging is disabled. The processor
 	# state is as defined in the multiboot standard. The kernel has full
@@ -56,13 +67,8 @@ _start:
 	# stack (as it grows downwards on x86 systems). This is necessarily done
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
-	movq $0x0000000000000000, 0x2
-	movq $0x00CF9A000000FFFF, 0x42
-	movq $0x00CF92000000FFFF, 0x82
-	movq $0x00CFFA000000FFFF, 0xC2
-	movq $0x00CFF2000000FFFF, 0x102
-	movw $320, 300
-	movw $336, 2
+
+
 	mov $0x10, %ax
 	mov %ax, %ds
 	mov %ax, %es

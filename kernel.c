@@ -79,36 +79,13 @@ uint8_t memR(uint32_t addr) {
 
 
 void setupRubbish() {
-/*	*(uint64_t *)(0x200 + (64 * 0)) = 0x0000000000000000;
-	*(uint64_t *)(0x200 + (64 * 1)) = 0x00CF9A000000FFFF;
-	*(uint64_t *)(0x200 + (64 * 2)) = 0x00CF92000000FFFF;
-	*(uint64_t *)(0x200 + (64 * 3)) = 0x00CFFA000000FFFF;
-	*(uint64_t *)(0x200 + (64 * 4)) = 0x00CFF2000000FFFF;
-	*(uint16_t *)0x100 = 0x113F;
-	*(uint32_t *)0x110 = 0x200;
-	__asm__("lgdt 0x100");
-	uint32_t *p = (uint32_t *)0x100;
-	char *c1 = "";
-	char *c2 = "";
-	itoa(p[0], c1, 10);
-	itoa(p[1], c2, 10);
-	kprints(c1);
-	kprints(c2);
-
-	__asm__ volatile ("movw $0x10, %ax");
-	__asm__ volatile ("movw %ax, %ds");
-	__asm__ volatile ("movw %ax, %es");
-	__asm__ volatile ("movw %ax, %fs");
-	__asm__ volatile ("movw %ax, %gs");
-	__asm__ volatile ("ljmp $0x08, $next\n next:");
- */
+        
 	}
 
 
 
 
 int kmain() {
-	//setupRubbish();
 	tcolor = colorizer(0, 10);
 	clearscreen();
 	trow = 0;
