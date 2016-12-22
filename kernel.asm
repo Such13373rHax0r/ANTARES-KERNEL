@@ -56,7 +56,12 @@ _start:
 
 
 	lgdt gdtr
-
+	mov $10, %ax
+	mov %ax, %ds
+	mov %ax, %fs
+	mov %ax, %es
+	mov %ax, %gs
+	mov %ax, %ss
 	# The bootloader has loaded us into 32-bit protected mode on a x86
 	# machine. Interrupts are disabled. Paging is disabled. The processor
 	# state is as defined in the multiboot standard. The kernel has full
