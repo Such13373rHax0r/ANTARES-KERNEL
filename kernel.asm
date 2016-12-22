@@ -50,7 +50,7 @@ gdtr:
 _start:
 
 
-	lgdt $gdtr
+	lgdtq $gdtr
 
 	# The bootloader has loaded us into 32-bit protected mode on a x86
 	# machine. Interrupts are disabled. Paging is disabled. The processor
