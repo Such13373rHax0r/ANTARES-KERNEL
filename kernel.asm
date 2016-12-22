@@ -39,7 +39,7 @@ gdt:
 .quad 0x00CFF2000000FFFF
 gdtr:
 .word 320
-.dword gdt
+.quad gdt
 
 # The linker script specifies _start as the entry point to the kernel and the
 # bootloader will jump to this position once the kernel has been loaded. It
