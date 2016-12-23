@@ -37,16 +37,15 @@ stack_top:
 # bootloader will jump to this position once the kernel has been loaded. It
 # doesn't make sense to return from this function as the bootloader is gone.
 .section .data
-gdt:
+_gdt:
 .quad 0x0000000000000000
 .quad 0x00cf9a000000ffff
 .quad 0x00cf92000000ffff
 .quad 0x0000000000000000
-.quad 0x0000000000000000
-gdtr:
-.word 320
-.quad gdt
-
+.fill 252,8,0
+_gdtr:
+.word 256*8-1
+.long _gdt
 
 
 .section .text
@@ -55,8 +54,8 @@ gdtr:
 _start:
 
 
-	lgdt gdtr
-	code:
+	lgdt _gdtr
+	_code:
 	mov $10, %ax
 	mov %ax, %ds
 	mov %ax, %fs
