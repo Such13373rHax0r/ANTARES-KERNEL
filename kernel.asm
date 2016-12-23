@@ -55,7 +55,7 @@ _start:
 
 
 	lgdt _gdtr
-	ljmp $0x08, _code
+	ljmp $0x08, $_code
 	_code:
 	mov $10, %ax
 	mov %ax, %ds
