@@ -39,10 +39,10 @@ stack_top:
 .section .data
 gdt:
 .quad 0x0000000000000000
-.quad 0x00CF9A000000FFFF
-.quad 0x00CF92000000FFFF
-.quad 0x00CFFA000000FFFF
-.quad 0x00CFF2000000FFFF
+.quad 0x00cf9a000000ffff
+.quad 0x00cf92000000ffff
+.quad 0x0000000000000000
+.quad 0x0000000000000000
 gdtr:
 .word 320
 .quad gdt
@@ -80,7 +80,7 @@ _start:
 	mov $stack_top, %esp
 
 	mov $0x10, %ax
-#	mov %ax, %ds
+	mov %ax, %ds
 	mov %ax, %es
 	mov %ax, %fs
 	mov %ax, %gs
