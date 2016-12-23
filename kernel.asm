@@ -56,7 +56,6 @@ _start:
 
 
 	lgdt gdtr
-	ljmp $0x8, $code
 	code:
 	mov $10, %ax
 	mov %ax, %ds
@@ -80,9 +79,8 @@ _start:
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
 
-
 	mov $0x10, %ax
-	mov %ax, %ds
+#	mov %ax, %ds
 	mov %ax, %es
 	mov %ax, %fs
 	mov %ax, %gs
