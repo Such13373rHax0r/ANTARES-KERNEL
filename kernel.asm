@@ -39,8 +39,8 @@ stack_top:
 .section .data
 _gdt:
 .quad 0x0000000000000000
-.quad 0x00cf9a000000ffff
-.quad 0x00cf92000000ffff
+.quad 0x00c09a0000000fff
+.quad 0x00c0920000000fff
 .quad 0x0000000000000000
 .fill 252,8,0
 _gdtr:
@@ -78,14 +78,6 @@ _start:
 	# stack (as it grows downwards on x86 systems). This is necessarily done
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
-
-	mov $0x10, %ax
-	mov %ax, %ds
-	mov %ax, %es
-	mov %ax, %fs
-	mov %ax, %gs
-	ljmp $0x08, $next
-	next:
 
 	# This is a good place to initialize crucial processor state before the
 	# high-level kernel is entered. It's best to minimize the early
