@@ -39,12 +39,12 @@ stack_top:
 .section .data
 _gdt:
 .quad 0x0000000000000000
-.quad 0x00c09a0000000fff
-.quad 0x00c0920000000fff
+.quad 0x00cf9a000000ffff
+.quad 0x00cf92000000ffff
 .quad 0x0000000000000000
 .fill 252,8,0
 _gdtr:
-.word 256*8-1
+.word .-_gdt-1
 .long _gdt
 
 
@@ -54,15 +54,15 @@ _gdtr:
 _start:
 
 
-	lgdt _gdtr
-	ljmp $0x08, $_code
-	_code:
-	mov $10, %ax
-	mov %ax, %ds
-	mov %ax, %fs
-	mov %ax, %es
-	mov %ax, %gs
-	mov %ax, %ss
+#	lgdt _gdtr
+#	ljmp $0x08, $_code
+#	_code:
+#	mov $10, %ax
+#	mov %ax, %ds
+#	mov %ax, %fs
+#	mov %ax, %es
+#	mov %ax, %gs
+#	mov %ax, %ss
 	# The bootloader has loaded us into 32-bit protected mode on a x86
 	# machine. Interrupts are disabled. Paging is disabled. The processor
 	# state is as defined in the multiboot standard. The kernel has full
@@ -79,6 +79,8 @@ _start:
 	# in assembly as languages such as C cannot function without a stack.
 	mov $stack_top, %esp
 
+]
+
 	# This is a good place to initialize crucial processor state before the
 	# high-level kernel is entered. It's best to minimize the early
 	# environment where crucial features are offline. Note that the
@@ -87,7 +89,24 @@ _start:
 	# yet. The GDT should be loaded here. Paging should be enabled here.
 	# C++ features such as global constructors and exceptions will require
 	# runtime support to work as well.
-
+	movl $0x10,%eax
+	mov %ax,%ds
+	mov %ax,%es
+	mov %ax,%fs
+	mov %ax,%gs
+	lss stack_top,%esp
+	call setup_gdt
+	movl $0x10,%eax		# reload all the segment registers
+	mov %ax,%ds		# after changing gdt. CS was already
+	mov %ax,%es		# reloaded in 'setup_gdt'
+	mov %ax,%fs
+	mov %ax,%gs
+	lss stack_top,%esp
+	xorl %eax,%eax
+1:incl %eax		# check that A20 really IS enabled
+	movl %eax,0x000000	# loop forever if it isn't
+	cmpl %eax,0x100000
+	je 1b
 	# Enter the high-level kernel. The ABI requires the stack is 16-byte
 	# aligned at the time of the call instruction (which afterwards pushes
 	# the return pointer of size 4 bytes). The stack was originally 16-byte
@@ -107,8 +126,12 @@ _start:
 	# 3) Jump to the hlt instruction if it ever wakes up due to a
 	#    non-maskable interrupt occurring or due to system management mode.
 	cli
-1:	hlt
-	jmp 1b
+lp:	hlt
+	jmp lp
+
+	setup_gdt:
+		lgdt _gdtr
+		ret
 
 # Set the size of the _start symbol to the current location '.' minus its start.
 # This is useful when debugging or when you implement call tracing.
