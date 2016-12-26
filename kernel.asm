@@ -1,4 +1,4 @@
-.set ALIGN,    1<<0             
+.set ALIGN,    1<<0
 .set MEMINFO,  1<<1
 .set FLAGS,    ALIGN | MEMINFO
 .set MAGIC,    0x1BADB002
@@ -35,7 +35,6 @@ _start:
 
 
 	lgdt _gdtr
-	ljmp $0x08, $_code
 	_code:
 	mov $10, %ax
 	mov %ax, %ds
