@@ -36,7 +36,7 @@ _start:
 
 	lgdt _gdtr
 	_code:
-	mov $10, %ax
+	mov $0x10, %ax
 	mov %ax, %ds
 	mov %ax, %fs
 	mov %ax, %es
