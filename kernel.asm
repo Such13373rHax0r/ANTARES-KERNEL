@@ -50,8 +50,4 @@ _start:
 lp:	hlt
 	jmp lp
 
-	setup_gdt:
-		lgdt _gdtr
-		ret
-
 .size _start, . - _start
