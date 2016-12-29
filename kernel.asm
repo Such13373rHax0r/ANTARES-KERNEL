@@ -34,7 +34,7 @@ _gdtr:
 _start:
 
 
-	lgdt $_gdtr
+	lgdt _gdtr
 	_code:
 	mov $0x10, %ax
 	mov %ax, %ds
