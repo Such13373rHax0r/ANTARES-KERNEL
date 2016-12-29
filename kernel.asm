@@ -25,7 +25,7 @@ _gdt:
 .quad 0x00CFF2000000FFFF
 _gdtr:
 .word 0x140
-.long _gdt
+.long 0x101004
 
 
 .section .text
