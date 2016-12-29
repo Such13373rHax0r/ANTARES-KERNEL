@@ -25,7 +25,7 @@ _gdt:
 .quad 0x00CFF2000000FFFF
 _gdtr:
 .word 0x140
-.long 0x101004
+.long $_gdt
 
 
 .section .text
@@ -34,7 +34,7 @@ _gdtr:
 _start:
 
 
-	lgdt _gdtr
+	lgdt $_gdtr
 	_code:
 	mov $0x10, %ax
 	mov %ax, %ds
