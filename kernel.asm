@@ -29,7 +29,8 @@ _start:
 	mov %ax, %es
 	mov %ax, %gs
 	mov %ax, %ss
-	
+	ljmp $0x8, next
+	next:
 	mov $stack_top, %esp
 	call kmain
 
