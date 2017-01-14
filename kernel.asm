@@ -17,20 +17,33 @@ stack_bottom:
 stack_top:
 
 .section .data
+gdt:
+.quad 0x0000000000000000
+.quad 0x00CF9A000000FFFF
+.quad 0x00CF92000000FFFF
+.quad 0x00CFFA000000FFFF
+.quad 0x00CFF2000000FFFF
+gdtdesc:
+.word .-gdt
+.quad 0x140
+idt:
 
 
 .section .text
 .global _start
 .type _start, @function
 _start:
+	lgdt gdtdesc
+	call segment_reset
+	segment_reset:
 	mov $0x10, %ax
 	mov %ax, %ds
 	mov %ax, %fs
 	mov %ax, %es
 	mov %ax, %gs
 	mov %ax, %ss
-	ljmp $0x8, next
-	next:
+	idt_setup:
+	
 	mov $stack_top, %esp
 	call kmain
 
