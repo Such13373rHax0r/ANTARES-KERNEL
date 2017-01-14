@@ -33,6 +33,7 @@ idt:
 .global _start
 .type _start, @function
 _start:
+	mov gdtdesc, %eax
 	lgdt gdtdesc
 	call segment_reset
 	segment_reset:
