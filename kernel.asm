@@ -25,7 +25,7 @@ gdt:
 .quad 0x00CFF2000000FFFF
 gdtdesc:
 .word .-gdt
-.double 0x140
+.word 0x140
 idt:
 
 
@@ -33,7 +33,7 @@ idt:
 .global _start
 .type _start, @function
 _start:
-	#lgdt gdtdesc
+	lgdt gdtdesc
 	call segment_reset
 	segment_reset:
 	mov $0x10, %ax
