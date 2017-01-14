@@ -25,7 +25,7 @@ gdt:
 .quad 0x00CFF2000000FFFF
 gdtdesc:
 .word .-gdt
-.quad 0x140
+.double 0x140
 idt:
 
 
