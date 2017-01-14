@@ -33,7 +33,7 @@ idt:
 .global _start
 .type _start, @function
 _start:
-	lgdt gdtdesc
+	#lgdt gdtdesc
 	call segment_reset
 	segment_reset:
 	mov $0x10, %ax
@@ -43,7 +43,7 @@ _start:
 	mov %ax, %gs
 	mov %ax, %ss
 	idt_setup:
-	
+
 	mov $stack_top, %esp
 	call kmain
 
