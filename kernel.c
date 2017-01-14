@@ -93,7 +93,7 @@ void outb(uint8_t btw, uint16_t port) {
 //READ BYTE FROM PORT
 uint8_t inb(uint16_t port) {
 	uint8_t btw = 0;
-	asm volatile ("inb %1, %0" : : "=a"(btw), "Nd"(port));
+	asm volatile ("inb %1, %0" : "=a"(btw) : "Nd"(port));
 	return btw;
 }
 
