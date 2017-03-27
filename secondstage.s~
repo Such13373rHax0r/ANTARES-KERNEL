@@ -1,0 +1,46 @@
+[BITS 16]
+
+cli
+
+
+xor eax, eax
+mov ax, ds
+shl eax, 4
+add eax, gdt
+mov [gdtr + 2], eax
+mov eax, gdt_end
+sub eax, gdt
+mov [gdtr], ax
+lgdt [gdtr]
+mov eax, cr0
+or eax, 1
+mov cr0, eax
+
+ 
+jmp 0x8:pmain
+ pmain:
+mov ax, 0x10
+mov ds, ax
+mov es, ax
+mov fs, ax
+mov gs, ax
+mov ss, ax
+
+ ;Do nothing loop
+ loop:
+ mov eax, 0deadbeefh
+hlt
+jmp loop
+ 
+ 
+ gdt:
+dq 0x0000000000000000
+dq 0x00CF9A000000FFFF
+dq 0x00CF92000000FFFF
+dq 0x00CFFA000000FFFF
+dq 0x00CFF2000000FFFF
+ gdt_end:
+
+gdtr:
+dw 0
+dd 0
