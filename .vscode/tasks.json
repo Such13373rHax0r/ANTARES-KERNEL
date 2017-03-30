@@ -1,0 +1,10 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "name": "buildAntares",
+    "version": "0.1.0",
+    "command": "/Users/simon/Projects/ANTARES-KERNEL/build.sh",
+    "isShellCommand": true,
+    "args": [""],
+    "showOutput": "always"
+}
