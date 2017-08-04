@@ -1,0 +1,2 @@
+grub-file --is-x86-multiboot2 iso/boot/ANTARESKERN64.bin
+echo $?

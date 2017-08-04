@@ -1,0 +1,6 @@
+.DS_Store
+buildPriv.sh
+bochsout.txt
+*.o
+*.bin
+*.iso
