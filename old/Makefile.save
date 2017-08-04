@@ -1,6 +1,0 @@
-measandwich:
-	echo "What?, do it yourself"
-
-objects:
-	$(CC) -c kernel.c -o kernelc.o
-	$(AS) -c kernel.asm -o kernela.o
